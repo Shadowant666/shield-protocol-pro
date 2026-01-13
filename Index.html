@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shield Protocol - Demo</title>
+  <style>
+    body { margin: 0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: #071129; color: #e6eef8; min-height: 100vh; display:flex; align-items:center; justify-content:center; }
+    .panel { width: 420px; background:#0f172a; padding:20px; border-radius:12px; border:1px solid #213044; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    h1 { margin:0 0 8px 0; font-size:18px; }
+    p { margin:0 0 12px 0; color:#9fb3d6; font-size:13px; }
+    button { padding:10px 12px; border-radius:8px; border:none; cursor:pointer; font-weight:600; }
+    .primary { background:#3b82f6; color:white; }
+    .success { background:#10b981; color:white; }
+    .muted { background:#1e293b; color:#b8d3ef; }
+    .row { display:flex; gap:8px; margin-top:12px; }
+    .small { font-size:12px; color:#9fb3d6; margin-top:10px; }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <h1>Shield Protocol — Demo Website</h1>
+    <p>This demo loads engine.js and content.js in a webpage context (no Chrome extension required). If you have MetaMask or another injected wallet, engine.js will intercept eth_sendTransaction and simulate it via Tenderly (replace the credentials first!).</p>
+
+    <div class="row">
+      <button id="simulate" class="primary">Simulate Report</button>
+      <button id="openPopup" class="muted">Open License UI</button>
+      <button id="clear" class="muted">Clear License</button>
+    </div>
+
+    <div class="small">
+      <strong>Note:</strong> Replace Tenderly credentials in engine.js before using live. This page includes a sample "Simulate Report" for development/testing.
+    </div>
+  </div>
+
+  <!-- Load engine first so it's available to intercept wallet calls -->
+  <script src="engine.js"></script>
+  <!-- UI script that listens for reports and shows the modal -->
+  <script src="content.js"></script>
+
+  <!-- lightweight app-like UI script -->
+  <script>
+    // small inline helper for demo license UI using localStorage
+    document.getElementById('simulate').addEventListener('click', () => {
+      // Post a demo report to the page (same shape engine would send)
+      window.postMessage({
+        type: "SHIELD_REPORT",
+        payload: {
+          risk: "Medium",
+          color: "#f59e0b",
+          changes: ["-0.5 ETH", "+100 USDC"],
+          details: "Simulation: estimated asset delta:\n-0.5 ETH\n+100 USDC\nGas estimate: 0.0041 ETH\nNote: This is only an estimate."
+        }
+      }, "*");
+    });
+
+    document.getElementById('openPopup').addEventListener('click', () => {
+      // Simple inline popup replacement: open popup.html if present, else show a simple UI
+      if (window.open) {
+        window.open('popup.html', '_blank', 'width=360,height=520');
+      }
+    });
+
+    document.getElementById('clear').addEventListener('click', () => {
+      localStorage.removeItem('isPro');
+      alert('License cleared (localStorage).');
+    });
+  </script>
+</body>
+</html>
