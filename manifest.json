@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Shield Protocol Pro",
+  "version": "1.0",
+  "description": "Antivirus for Web3: Preview transaction outcomes before you sign.",
+  "permissions": ["storage", "activeTab", "identity"],
+  "host_permissions": ["https://api.tenderly.co/*", "<all_urls>"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "js": ["content.js"],
+      "matches": ["<all_urls>"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["engine.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
