@@ -1,0 +1,17 @@
+Title: feat: web demo + Chrome extension + serverless simulator (secure Tenderly proxy)
+
+Body: This PR:
+
+Adds a Chrome extension manifest (MV3), unified content script (content.js), and updated engine.js that uses a server-side simulator endpoint.
+Adds a Vercel serverless function (api/simulate.js) to proxy simulation calls to Tenderly using server-side env vars (TENDERLY_KEY, TENDERLY_ACCOUNT, TENDERLY_PROJECT).
+Adds a GitHub Action (/.github/workflows/vercel-deploy.yml) to deploy to Vercel on main pushes / PRs using VERCEL_TOKEN.
+Includes README.md with setup and security guidance.
+
+Security rationale:
+
+Tenderly API keys MUST NOT be embedded in client-side code. This change moves the key to a serverless function and updates the client to call that endpoint. A leaked key should be rotated immediately and removed from git history (instructions below).
+Notes:
+
+I did NOT rewrite git history automatically. Rewriting is destructive — see the "Remove hard-coded key from git history" section below for commands. I can perform history rewrite if you explicitly authorize it (I'll need to force-push and coordinate with any collaborators).
+After deployment, set window.SHIELD_SIMULATOR_ENDPOINT to your Vercel function URL or edit engine.js accordingly.
+Please verify popup.html/popup.js remain unchanged and functioning in the extension.
