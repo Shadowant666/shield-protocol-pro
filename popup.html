@@ -2,21 +2,34 @@
 <html>
 <head>
   <style>
-    body { width: 300px; padding: 20px; background: #0f172a; color: white; font-family: sans-serif; }
-    .btn { width: 100%; padding: 12px; border: none; color: white; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 10px; }
-    .status { background: #1e293b; padding: 10px; border-radius: 8px; font-size: 12px; margin-bottom: 15px; text-align: center; }
-    input { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #334155; background: #0f172a; color: white; box-sizing: border-box; }
+    body { width: 320px; padding: 20px; background: #0f172a; color: white; font-family: sans-serif; }
+    .status-box { background: #1e293b; padding: 15px; border-radius: 10px; margin-bottom: 20px; text-align: center; border: 1px solid #334155; }
+    .btn { width: 100%; padding: 12px; border: none; color: white; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 10px; transition: 0.2s; }
+    .btn:hover { opacity: 0.9; }
+    #paypal-container-RZ94PA7RP9F2U { margin-top: 15px; min-height: 50px; }
+    input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; box-sizing: border-box; margin-bottom: 10px; }
   </style>
 </head>
 <body>
-  <h3>Shield Protocol</h3>
-  <div id="status" class="status">License: Basic</div>
-  <button id="buy-btn" class="btn" style="background: #3b82f6;">Upgrade to Pro ($9/mo)</button>
-  <div id="sync-ui" style="margin-top:20px; border-top:1px solid #334155; padding-top:15px;">
-    <input type="email" id="email" placeholder="Email used on Stripe">
-    <button id="sync-btn" class="btn" style="background: #10b981;">Sync Subscription</button>
+  <h3 style="margin-top:0;">Shield Protocol Pro</h3>
+  
+  <div class="status-box">
+    <div id="status-text" style="font-weight:bold; color: #94a3b8;">Trial Version</div>
+    <div id="usage-info" style="font-size:12px; color:#64748b;">3 free uses remaining</div>
   </div>
-  <p id="msg" style="font-size:10px; text-align:center; margin-top:10px;"></p>
+
+  <div id="upgrade-area">
+    <p style="font-size: 13px; color: #94a3b8; margin-bottom: 5px;">Upgrade to Protection:</p>
+    <div id="paypal-container-RZ94PA7RP9F2U"></div>
+  </div>
+
+  <div id="sync-section" style="margin-top:20px; border-top:1px solid #334155; padding-top:15px;">
+    <input type="text" id="sync-email" placeholder="Enter PayPal Email">
+    <button id="sync-btn" class="btn" style="background: #1e293b;">Sync My Payment</button>
+    <p id="msg" style="font-size:11px; text-align:center; color:#f59e0b; margin-top:10px;"></p>
+  </div>
+
+  <script src="https://www.paypal.com/sdk/js?client-id=BAA0DhA_RrPiwofoWCxwC2vPzhOhy-IgGjuiDdRCwA-i4ycI99rPcw9BuS-J05sSDp__8OPofy9mwcndCs&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
   <script src="popup.js"></script>
 </body>
 </html>
