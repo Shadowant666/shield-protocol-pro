@@ -13,30 +13,32 @@
     /* Consent Overlay Styles */
     #consent-overlay { 
       position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-      background: #0f172a; z-index: 9999; display: none; 
-      flex-direction: column; padding: 25px; box-sizing: border-box; text-align: center; 
+      background: #0f172a; z-index: 9999; display: none; flex-direction: column; 
+      padding: 20px; box-sizing: border-box; justify-content: center;
     }
+    .consent-card { background: #1e293b; padding: 20px; border-radius: 12px; border: 1px solid #334155; }
+    .consent-card h2 { margin-top: 0; font-size: 18px; color: #38bdf8; }
+    .consent-card p { font-size: 13px; line-height: 1.5; color: #94a3b8; }
+    .consent-card ul { padding-left: 20px; margin: 10px 0; }
+    .consent-card li { font-size: 12px; color: #cbd5e1; margin-bottom: 8px; }
   </style>
 </head>
 <body>
 
   <div id="consent-overlay">
-    <h2 style="color: #22c55e; margin-top: 0;">Shield Protocol Pro</h2>
-    <p style="font-size: 14px; color: #94a3b8; line-height: 1.5;">
-      To protect your wallet, we securely simulate your transactions before you sign them.
-    </p>
-    <div style="text-align: left; background: #1e293b; padding: 15px; border-radius: 10px; font-size: 12px; margin-bottom: 15px; border: 1px solid #334155;">
-      <strong>Privacy Disclosure:</strong>
-      <ul style="padding-left: 18px; margin-top: 8px; color: #cbd5e1;">
-        <li>Transaction data is sent via HTTPS to our server for simulation only.</li>
-        <li>Emails are used strictly to verify your Pro license.</li>
-        <li>We <strong>never</strong> access your private keys.</li>
+    <div class="consent-card">
+      <h2>Privacy & Data Usage</h2>
+      <p>To provide security simulations, Shield Protocol Pro needs to analyze transaction data.</p>
+      <ul>
+        <li><strong>Transaction Data:</strong> We analyze contract interactions to predict asset changes.</li>
+        <li><strong>License Sync:</strong> We use your email to verify PayPal subscriptions.</li>
+        <li><strong>No Data Sale:</strong> Your data is never sold or used for advertising.</li>
       </ul>
+      <button id="accept-consent" class="btn" style="background: #22c55e;">Accept & Protect</button>
+      <p style="font-size: 11px; color: #64748b; margin-top: 15px;">
+        View our <a href="https://shield-protocol-7s6jrb0nh-akbouret-3815s-projects.vercel.app/Privacy.html" target="_blank" style="color: #38bdf8; text-decoration: none;">Privacy Policy</a>
+      </p>
     </div>
-    <button id="accept-consent" class="btn" style="background: #22c55e;">Accept & Protect</button>
-    <p style="font-size: 11px; color: #64748b; margin-top: 15px;">
-      View our <a href="YOUR_PRIVACY_POLICY_URL" target="_blank" style="color: #38bdf8; text-decoration: none;">Privacy Policy</a>
-    </p>
   </div>
 
   <div class="content-wrapper">
@@ -52,14 +54,4 @@
       <div id="paypal-container-RZ94PA7RP9F2U"></div>
     </div>
 
-    <div id="sync-section" style="margin-top:20px; border-top:1px solid #334155; padding-top:15px;">
-      <input type="text" id="sync-email" placeholder="Enter PayPal Email">
-      <button id="sync-btn" class="btn" style="background: #1e293b;">Sync My Payment</button>
-      <p id="msg" style="font-size:11px; text-align:center; color:#f59e0b; margin-top:10px;"></p>
-    </div>
-  </div>
-
-  <script src="https://www.paypal.com/sdk/js?client-id=BAA0DhA_RrPiwofoWCxwC2vPzhOhy-IgGjuiDdRCwA-i4ycI99rPcw9BuS-J05sSDp__8OPofy9mwcndCs&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
-  <script src="popup.js"></script>
-</body>
-</html>
+    <div id="sync-section" style="margin-top:20px; border-top:1
