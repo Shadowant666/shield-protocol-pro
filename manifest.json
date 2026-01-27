@@ -3,7 +3,7 @@
   "name": "Shield Protocol Pro",
   "version": "1.2",
   "description": "Antivirus for Web3: Preview transaction outcomes before you sign.",
-  "permissions": ["storage", "activeTab"],
+  "permissions": ["storage"],
   "host_permissions": [
     "https://shield-protocol-7s6jrb0nh-akbouret-3815s-projects.vercel.app/*",
     "https://www.paypal.com/*",
@@ -11,31 +11,20 @@
   ],
   "action": {
     "default_popup": "popup.html",
-    "default_icon": {
-      "16": "icon16.png",
-      "48": "icon48.png",
-      "128": "icon128.png"
-    }
+    "default_icon": { "16": "icon16.png", "48": "icon48.png", "128": "icon128.png" }
   },
-  "icons": {
-    "16": "icon16.png",
-    "48": "icon48.png",
-    "128": "icon128.png"
-  },
+  "icons": { "16": "icon16.png", "48": "icon48.png", "128": "icon128.png" },
   "content_scripts": [
+    {
+      "js": ["engine.js"],
+      "matches": ["<all_urls>"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
     {
       "js": ["content.js"],
       "matches": ["<all_urls>"],
       "run_at": "document_start"
     }
-  ],
-  "web_accessible_resources": [
-    {
-      "resources": ["engine.js"],
-      "matches": ["<all_urls>"]
-    }
-  ],
-  "content_security_policy": {
-    "extension_pages": "script-src 'self' https://www.paypal.com; object-src 'self'"
-  }
+  ]
 }
